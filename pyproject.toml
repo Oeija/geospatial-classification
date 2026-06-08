@@ -1,0 +1,111 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geospatial-classification"
+version = "0.1.0"
+description = "Geospatial land classification using CNN-ViT hybrids in PyTorch and Keras"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+keywords = ["deep-learning", "geospatial", "classification", "pytorch", "vision-transformer"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "numpy>=1.24,<2.0",
+    "matplotlib>=3.7.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.3.0",
+
+    "httpx>=0.24.0",
+    "Pillow>=9.5.0",
+    "tqdm>=4.65.0",
+    "pyyaml>=6.0",
+    "typing-extensions>=4.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.3.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.3.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "flake8-pyproject>=1.2.0",
+    "mypy>=1.3.0",
+    "pre-commit>=3.3.0",
+]
+
+[project.scripts]
+gsc-train-cnn = "geospatial_classification.scripts.train_cnn:main"
+gsc-train-hybrid = "geospatial_classification.scripts.train_hybrid:main"
+gsc-evaluate = "geospatial_classification.scripts.evaluate_models:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+geospatial_classification = ["py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  | notebooks
+  | notebooks_refactored
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = ["geospatial_classification"]
+skip = ["notebooks", "notebooks_refactored"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --strict-markers --cov=geospatial_classification --cov-report=term-missing"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
+
+[tool.flake8]
+max-line-length = 100
+exclude = [
+    ".git",
+    "__pycache__",
+    "notebooks",
+    "notebooks_refactored",
+    "build",
+    "dist",
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+exclude = [
+    "notebooks",
+    "notebooks_refactored",
+    "tests",
+]

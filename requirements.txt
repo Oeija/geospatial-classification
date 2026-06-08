@@ -1,0 +1,5 @@
+# Development / editable install requirements
+# Use: pip install -e '.[dev]'
+# Or install the package directly with: pip install -e .
+
+-e .
