@@ -1,0 +1,23 @@
+# Configuration for training the pure CNN backbone (M2L2 equivalent)
+data:
+  dataset_path: "data/raw/images_dataSAT"
+  img_size: 64
+  batch_size: 128
+  train_split: 0.8
+  num_workers: 4
+
+model:
+  num_classes: 2
+  checkpoint_name: "checkpoints/cnn_best.pth"
+
+training:
+  epochs: 20
+  lr: 0.001
+  seed: 42
+  device: "auto"   # "auto" | "cuda" | "cpu"
+  early_stopping:
+    patience: 3
+
+logging:
+  level: "INFO"
+  log_file: "logs/train_cnn.log"

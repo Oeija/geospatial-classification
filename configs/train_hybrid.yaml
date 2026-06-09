@@ -1,0 +1,28 @@
+# Configuration for training the CNN-ViT hybrid (M3L2 equivalent)
+data:
+  dataset_path: "data/raw/images_dataSAT"
+  img_size: 64
+  batch_size: 32
+  train_split: 0.8
+  num_workers: 4
+
+model:
+  num_classes: 2
+  embed_dim: 768
+  depth: 3
+  heads: 6
+  pretrained_cnn_path: "checkpoints/cnn_best.pth"
+  checkpoint_name: "checkpoints/hybrid_best.pth"
+  strict_loading: false
+
+training:
+  epochs: 20
+  lr: 0.001
+  seed: 7331
+  device: "auto"
+  early_stopping:
+    patience: 3
+
+logging:
+  level: "INFO"
+  log_file: "logs/train_hybrid.log"

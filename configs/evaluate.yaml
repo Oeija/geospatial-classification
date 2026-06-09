@@ -1,0 +1,25 @@
+# Configuration for evaluating the PyTorch CNN-ViT hybrid (M4L1 equivalent)
+data:
+  dataset_path: "data/raw/images_dataSAT"
+  img_size: 64
+  batch_size: 128
+
+models:
+  pytorch:
+    state_dict_path: "checkpoints/hybrid_best.pth"
+    embed_dim: 768
+    depth: 3
+    heads: 6
+
+evaluation:
+  class_labels:
+    - "non-agri"
+    - "agri"
+  seed: 42
+  device: "auto"
+  save_plots: true
+  plots_dir: "plots"
+
+logging:
+  level: "INFO"
+  log_file: "logs/evaluate.log"
