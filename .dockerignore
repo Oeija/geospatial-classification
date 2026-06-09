@@ -1,0 +1,25 @@
+# Build context exclusions
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.env
+.venv/
+venv/
+.git/
+.gitignore
+*.md
+notebooks/
+notebooks_refactored/
+images_dataSAT/
+images-dataSAT.tar
+*.tar
+*.tar.gz
+checkpoints/
+logs/
+plots/
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db

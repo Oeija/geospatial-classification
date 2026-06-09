@@ -1,0 +1,96 @@
+version: "3.9"
+
+services:
+  train-cnn:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: geospatial-classification:latest
+    container_name: gsc-train-cnn
+    volumes:
+      - ./data:/app/data
+      - ./images-dataSAT.tar:/app/images-dataSAT.tar:ro
+      - ./checkpoints:/app/checkpoints
+      - ./logs:/app/logs
+      - ./plots:/app/plots
+    command: >
+      python -m geospatial_classification.scripts.train_cnn
+      --config configs/train_cnn.yaml
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  train-hybrid:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: geospatial-classification:latest
+    container_name: gsc-train-hybrid
+    volumes:
+      - ./data:/app/data
+      - ./images-dataSAT.tar:/app/images-dataSAT.tar:ro
+      - ./checkpoints:/app/checkpoints
+      - ./logs:/app/logs
+      - ./plots:/app/plots
+    command: >
+      python -m geospatial_classification.scripts.train_hybrid
+      --config configs/train_hybrid.yaml
+    depends_on:
+      - train-cnn
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  evaluate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: geospatial-classification:latest
+    container_name: gsc-evaluate
+    volumes:
+      - ./data:/app/data
+      - ./images-dataSAT.tar:/app/images-dataSAT.tar:ro
+      - ./checkpoints:/app/checkpoints
+      - ./logs:/app/logs
+      - ./plots:/app/plots
+    command: >
+      python -m geospatial_classification.scripts.evaluate_models
+      --config configs/evaluate.yaml
+    depends_on:
+      - train-hybrid
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # Optional: run tests inside the GPU container
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: geospatial-classification:latest
+    container_name: gsc-test
+    volumes:
+      - ./tests:/app/tests:ro
+      - ./src:/app/src:ro
+      - ./configs:/app/configs:ro
+    command: >
+      pytest tests/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

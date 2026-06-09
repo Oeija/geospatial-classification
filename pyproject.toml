@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "geospatial-classification"
 version = "0.1.0"
-description = "Geospatial land classification using CNN-ViT hybrids in PyTorch and Keras"
+description = "A modular, production-ready deep-learning pipeline for geospatial land classification in PyTorch. Trains a CNN backbone from scratch and leverages transfer learning and fine-tuning to integrate it with a Vision Transformer (ViT) into an end-to-end hybrid classifier."
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
