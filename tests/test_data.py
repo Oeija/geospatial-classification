@@ -4,7 +4,6 @@ from pathlib import Path
 
 import pytest
 import torch
-from torchvision import transforms
 
 from geospatial_classification.data.download import CustomBinaryClassDataset
 from geospatial_classification.data.transforms import (

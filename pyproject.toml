@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "geospatial-classification"
 version = "0.1.0"
-description = "A modular, production-ready deep-learning pipeline for geospatial land classification in PyTorch. Trains a CNN backbone from scratch and leverages transfer learning and fine-tuning to integrate it with a Vision Transformer (ViT) into an end-to-end hybrid classifier."
+description = "A modular, production-ready deep-learning pipeline for geospatial land classification in PyTorch. Trains a CNN backbone from scratch and builds a CNN–Vision Transformer (ViT) hybrid by warm-starting the CNN into the full model, which is then trained end-to-end."
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
@@ -89,6 +89,7 @@ markers = [
 
 [tool.flake8]
 max-line-length = 100
+extend-ignore = "E203"
 exclude = [
     ".git",
     "__pycache__",

@@ -72,7 +72,9 @@ async def download_dataset(
     try:
         import skillsnetwork  # type: ignore[import-not-found]
 
-        await skillsnetwork.prepare(url=url, path=extract_dir, overwrite=overwrite)  # type: ignore[misc]
+        await skillsnetwork.prepare(  # type: ignore[misc]
+            url=url, path=extract_dir, overwrite=overwrite
+        )
         logger.info("Downloaded via skillsnetwork: %s", url)
     except Exception:
         logger.warning("skillsnetwork unavailable; falling back to manual download.")

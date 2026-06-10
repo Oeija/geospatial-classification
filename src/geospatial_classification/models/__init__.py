@@ -2,8 +2,8 @@
 
 from geospatial_classification.models.cnn import ConvNet
 from geospatial_classification.models.vit import (
-    CNN_ViT_Hybrid,
     MHSA,
+    CNN_ViT_Hybrid,
     PatchEmbed,
     TransformerBlock,
     ViT,

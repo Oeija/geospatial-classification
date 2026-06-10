@@ -1,10 +1,9 @@
 """Reproducibility and checkpointing utilities."""
 
 import logging
-import os
 import random
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 import numpy as np
 import torch

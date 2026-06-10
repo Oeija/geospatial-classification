@@ -1,9 +1,6 @@
 """Unit tests for training utilities."""
 
-import random
-
 import numpy as np
-import pytest
 import torch
 
 from geospatial_classification.training import set_seed, worker_init_fn

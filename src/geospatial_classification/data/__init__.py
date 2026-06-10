@@ -5,10 +5,7 @@ from geospatial_classification.data.download import (
     download_dataset,
     download_model_weights,
 )
-from geospatial_classification.data.setup import (
-    ensure_extracted,
-    load_or_create_splits,
-)
+from geospatial_classification.data.setup import ensure_extracted, load_or_create_splits
 from geospatial_classification.data.transforms import (
     get_inference_transform,
     get_train_transform,

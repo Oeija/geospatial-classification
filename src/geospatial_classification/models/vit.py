@@ -1,8 +1,5 @@
 """Vision Transformer components and CNN-ViT hybrid model."""
 
-import math
-from typing import Tuple
-
 import torch
 import torch.nn as nn
 
@@ -98,10 +95,7 @@ class ViT(nn.Module):
         self.cls = nn.Parameter(torch.zeros(1, 1, embed_dim))
         self.pos = nn.Parameter(torch.randn(1, max_tokens, embed_dim))
         self.blocks = nn.ModuleList(
-            [
-                TransformerBlock(embed_dim, heads, mlp_ratio, dropout)
-                for _ in range(depth)
-            ]
+            [TransformerBlock(embed_dim, heads, mlp_ratio, dropout) for _ in range(depth)]
         )
         self.norm = nn.LayerNorm(embed_dim)
         self.head = nn.Linear(embed_dim, num_classes)

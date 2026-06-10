@@ -53,9 +53,7 @@ def model_metrics(
         "ROC-AUC": roc_score,
         "Log Loss": log_loss(y_true, y_prob),
         "Confusion Matrix": confusion_matrix(y_true, y_pred),
-        "Classification Report": classification_report(
-            y_true, y_pred, target_names=class_labels
-        ),
+        "Classification Report": classification_report(y_true, y_pred, target_names=class_labels),
     }
     return metrics
 

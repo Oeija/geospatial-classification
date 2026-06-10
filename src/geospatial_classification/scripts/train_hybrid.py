@@ -4,10 +4,9 @@ import argparse
 import logging
 from pathlib import Path
 
-import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader, random_split
+from torch.utils.data import DataLoader
 from torchvision import datasets
 
 from geospatial_classification.config import get_device, load_config
@@ -79,9 +78,7 @@ def main() -> None:
         num_workers=num_workers,
         worker_init_fn=lambda wid: worker_init_fn(wid, base_seed=seed),
     )
-    logger.info(
-        "Train: %d samples | Val: %d samples", len(train_dataset), len(val_dataset)
-    )
+    logger.info("Train: %d samples | Val: %d samples", len(train_dataset), len(val_dataset))
 
     # Model
     m_cfg = cfg["model"]

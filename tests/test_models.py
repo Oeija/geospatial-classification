@@ -1,6 +1,5 @@
 """Unit tests for model architectures."""
 
-import pytest
 import torch
 
 from geospatial_classification.models import CNN_ViT_Hybrid, ConvNet, ViT

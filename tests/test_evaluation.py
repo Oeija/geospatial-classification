@@ -1,7 +1,6 @@
 """Unit tests for evaluation utilities."""
 
 import numpy as np
-import pytest
 
 from geospatial_classification.evaluation import model_metrics, plot_roc
 
